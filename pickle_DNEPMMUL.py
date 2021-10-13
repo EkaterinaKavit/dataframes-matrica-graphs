@@ -8,19 +8,23 @@ import matplotlib.pyplot as plt
 #Read pickle
 df=pd.read_pickle('F8_32_2.pickle')
 
-#choose unique parameters from the column "PARAMETER"
-df_without_duplicates=df['PARAMETER'].drop_duplicates(ignore_index=True)
+#choose unique parameters from the column "PARAMETER" for the loop
+#df_without_duplicates=df['PARAMETER'].drop_duplicates()
+nd_without_duplicates= df['PARAMETER'].unique()
+df_without_duplicates=pd.DataFrame(nd_without_duplicates)
+print(df_without_duplicates)
 
 #Create xlsx file with unique
-df_without_duplicates.to_excel('unique_parameters.xlsx')
-a=len(df_without_duplicates)
-#print(a)
-
+df_without_duplicates.to_excel('unique_parameters1.xlsx')
+# df_for_analise=df[df['PARAMETER']=='BNN1010BTA']
 
 for i in df_without_duplicates:
-    df_for_analise=df_without_duplicates[i]
-    print(df_for_analise)
-    #df_for_analise=df[df['PARAMETER']=='BNN1010BTA']
+   df_for_analise=df[df['PARAMETER']==i]
+   df_site1= df_for_analise['6 site']
+   df_site2 = df_site1.append(df_for_analise['17 site'],ignore_index=True)
+   df_site3 = df_site2.append(df_for_analise['19 site'],ignore_index=True)
+   df_site4 = df_site3.append(df_for_analise['28 site'],ignore_index=True)
+   df_site4.to_excel('loop_2_columns.xlsx')
 
 
 #making the dataframe with the meanings for all lots and sites for one PARAMETER
