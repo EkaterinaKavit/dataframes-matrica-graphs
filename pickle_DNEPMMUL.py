@@ -46,6 +46,10 @@ for i, row in enumerate(zgrid):
    for j, num in enumerate(row):
       if num>500: zgrid[i][j]=0;
       if num<-1000: zgrid[i][j]=0;
+
+zgrid=np.nan_to_num(zgrid)
+print(zgrid)
+
 #Rescaling
 scaler=per.MinMaxScaler(feature_range=(0,1))
 rescalezgrid=scaler.fit_transform(zgrid)
@@ -58,13 +62,13 @@ standardizedzgrid=scaler.transform(zgrid)
 #print(standardizedzgrid)
 
 #Normalization
-#scaler=Normalizer().fit(zgrid)
-#normalizezgrid=scaler.transform(zgrid)
+scaler=Normalizer().fit(zgrid)
+normalizezgrid=scaler.transform(zgrid)
 #print(normalizezgrid)
 
 
-surf=ax_3d.plot_surface(xgrid,ygrid,standardizedzgrid,cmap=cm.hsv)
-ax_3d.plot_wireframe(xgrid,ygrid,standardizedzgrid)
+surf=ax_3d.plot_surface(xgrid,ygrid,normalizezgrid,cmap=cm.hsv)
+ax_3d.plot_wireframe(xgrid,ygrid,normalizezgrid)
 ax_3d.set_xlabel('x')
 ax_3d.set_ylabel('y')
 ax_3d.set_zlabel('z')
