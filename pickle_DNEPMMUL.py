@@ -3,6 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
+import sklearn
+from sklearn import preprocessing as per
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import Normalizer
+
 
 df=pd.read_pickle('F8_32_2.pickle')
 
@@ -41,15 +46,30 @@ for i, row in enumerate(zgrid):
    for j, num in enumerate(row):
       if num>500: zgrid[i][j]=0;
       if num<-1000: zgrid[i][j]=0;
+#Rescaling
+scaler=per.MinMaxScaler(feature_range=(0,1))
+rescalezgrid=scaler.fit_transform(zgrid)
 
-#cm1=get_cmap('Reds')
-surf=ax_3d.plot_surface(xgrid,ygrid,zgrid,cmap=cm.jet)
-#ax_3d.plot_wireframe(xgrid,ygrid,zgrid)
+#Standartization
+
+scaler=StandardScaler().fit(zgrid)
+standardizedzgrid=scaler.transform(zgrid)
+
+#print(standardizedzgrid)
+
+#Normalization
+#scaler=Normalizer().fit(zgrid)
+#normalizezgrid=scaler.transform(zgrid)
+#print(normalizezgrid)
+
+
+surf=ax_3d.plot_surface(xgrid,ygrid,standardizedzgrid,cmap=cm.hsv)
+ax_3d.plot_wireframe(xgrid,ygrid,standardizedzgrid)
 ax_3d.set_xlabel('x')
 ax_3d.set_ylabel('y')
 ax_3d.set_zlabel('z')
 
-fig.colorbar(surf, shrink=0.5, aspect=5)
+#fig.colorbar(surf)#, shrink=0.5, aspect=5)
 
 plt.show()
 
