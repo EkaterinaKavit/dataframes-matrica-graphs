@@ -1,5 +1,3 @@
-#Считывание информации из эксель и печать необходимого куска
-
 import pandas as pd
 
 df=pd.read_excel('first_try_excel.xlsx', engine='openpyxl')
