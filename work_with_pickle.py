@@ -2,23 +2,23 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-wish_parameters = ['BNN1010BTA', 'BNN1010BV']
-#wish_parameters = ['EN1000P2', 'EN1000V']
+wish_parameters = ['BNN1', 'BNN2']
+#wish_parameters = ['EN1', 'EN2']
 
-# сравнить пвг на участках корреляции параметров и малой дисперсии  и   на участках рассинхрона параметров и большой дисперс (см принт 00:42)
-#wish_parameters = ['EN100M1', 'EN100M3', 'EN100X3', 'EN50CUM']
+# сравнить пв на участках корреляции параметров и малой дисперсии  и   на участках рассинхрона параметров и большой дисперс 
+#wish_parameters = ['EN12', 'EN13', 'EN14', 'EN15']
 
 
-#df=pd.read_excel('F8_PT_32kp_2.xlsx', engine='openpyxl')
-#df.to_pickle('F8_32_2.pickle')
-df1 = pd.read_pickle('F8_32_2.pickle')
+#df=pd.read_excel('F.xlsx', engine='openpyxl')
+#df.to_pickle('F.pickle')
+df1 = pd.read_pickle('F.pickle')
 
 for i in wish_parameters:
 #for i in set(df1['PARAMETER'].tolist()):
     df_for_plotting = df1[df1['PARAMETER'] == i]
     #df_for_plotting = df_for_plotting[300:700]
 
-    #df_for_plotting = df1[df1['PARAMETER'] == 'DNEPMMUL']
+    #df_for_plotting = df1[df1['PARAMETER'] == 'DNL']
     #df_wish_param = df_for_plotting[(df_for_plotting['6 site']<150) & (df_for_plotting['6 site']>-30)]
     #df_wish_param = df_wish_param['6 site']
 
@@ -31,11 +31,11 @@ for i in wish_parameters:
 
 
     #df_for_plotting.pivot_table(values='6 site', index='WAFER', fill_value=None,margins=False,dropna=True).plot(label=i)
-    df_site = df_for_plotting['6 site']
+    df_site = df_for_plotting['6 s']
     df_site.plot()
-    plt.title("Parameter in 6 site")
-    plt.ylabel('6 site')
-    plt.xlabel('Lots and wafers')
+    plt.title("Parameter in 6 s")
+    plt.ylabel('6 s')
+    plt.xlabel('L/w')
 
 plt.legend(df_for_plotting['PARAMETER'])
 plt.show()
