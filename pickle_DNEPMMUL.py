@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import Normalizer
 
 
-df=pd.read_pickle('F8_32_2.pickle')
+df=pd.read_pickle('F.pickle')
 
 nd_without_duplicates= df['PARAMETER'].unique()
 df_without_duplicates=pd.DataFrame(nd_without_duplicates)
@@ -21,11 +21,11 @@ result=pd.DataFrame()
 for i in df_without_duplicates[0]:
 
    df_for_analise=df[df['PARAMETER']==i]
-   df_site1= df_for_analise['6 site']
-   df_site2 = df_site1.append(df_for_analise['17 site'],ignore_index=True)
-   df_site3 = df_site2.append(df_for_analise['19 site'],ignore_index=True)
-   df_site4 = df_site3.append(df_for_analise['28 site'],ignore_index=True)
-   result= pd.concat([result,df_site4],ignore_index=True,axis=1)
+   df_site1= df_for_analise['6 s']
+   df_site2 = df_site1.append(df_for_analise['17 s'],ignore_index=True)
+   df_site3 = df_site2.append(df_for_analise['19 s'],ignore_index=True)
+   df_site4 = df_site3.append(df_for_analise['28 s'],ignore_index=True)
+   result= pd.concat([result,df_s4],ignore_index=True,axis=1)
 
 
 
